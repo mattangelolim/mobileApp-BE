@@ -32,6 +32,23 @@ app.post("/api/preference", async (req, res) => {
   }
 });
 
+app.get("/api/view/flower", async (req,res) =>{
+  try {
+    const id = req.query.id
+
+    const flowerClick = await Flower.findOne({
+      where:{
+        id:id
+      }
+    })
+
+    res.json(flowerClick)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({message: "Internal Server Error"})
+  }
+})
+
 app.listen(port, () => {
   console.log(`server running : ${port}`);
 });

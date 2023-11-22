@@ -27,7 +27,23 @@ const Flower = sequelize.define("Flower", {
     type: DataTypes.BOOLEAN,
     allowNull: false,
   },
-  description: {
+  light: {
+    type: DataTypes.TEXT,
+    allowNull: true, // Adjust as needed
+  },
+  fertilizer: {
+    type: DataTypes.TEXT,
+    allowNull: true, // Adjust as needed
+  },
+  water: {
+    type: DataTypes.TEXT,
+    allowNull: true, // Adjust as needed
+  },
+  soil: {
+    type: DataTypes.TEXT,
+    allowNull: true, // Adjust as needed
+  },
+  precaution: {
     type: DataTypes.TEXT,
     allowNull: true, // Adjust as needed
   },
