@@ -2,9 +2,14 @@ const express = require("express");
 const app = express();
 const port = 9001;
 const Flower = require("./models/Flowers")
+const fs = require("fs");
+const https = require("https");
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true }));
+
+const file = fs.readFileSync("./1E1E39C06F84D2F12E2D7ACBE472A999.txt")
+
 
 app.post("/api/preference", async (req, res) => {
   try {
@@ -47,6 +52,10 @@ app.get("/api/view/flower", async (req,res) =>{
     console.error(error)
     res.status(500).json({message: "Internal Server Error"})
   }
+})
+
+app.get('/.well-known/pki-validation/1E1E39C06F84D2F12E2D7ACBE472A999.txt', (req, res) => {
+  res.sendFile('/home/ubuntu/mobileApp-BE/1E1E39C06F84D2F12E2D7ACBE472A999.txt')
 })
 
 app.listen(port, () => {
