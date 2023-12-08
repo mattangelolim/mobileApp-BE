@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 9001;
+const httpsPort = 9443;
 const Flower = require("./models/Flowers")
 const fs = require("fs");
 const https = require("https");
@@ -8,7 +9,16 @@ const https = require("https");
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true }));
 
-const file = fs.readFileSync("./1E1E39C06F84D2F12E2D7ACBE472A999.txt")
+// const file = fs.readFileSync("./1E1E39C06F84D2F12E2D7ACBE472A999.txt")
+const key = fs.readFileSync("private.key");
+const cert = fs.readFileSync("certificate.crt");
+
+const cred = {
+  key,
+  cert,
+};
+
+const httpsServer = https.createServer(cred, app);
 
 
 app.post("/api/preference", async (req, res) => {
@@ -60,4 +70,8 @@ app.get('/.well-known/pki-validation/1E1E39C06F84D2F12E2D7ACBE472A999.txt', (req
 
 app.listen(port, () => {
   console.log(`server running : ${port}`);
+});
+
+httpsServer.listen(httpsPort, () => {
+  console.log(`HTTPS server is running on ${httpsPort}`);
 });
