@@ -5,9 +5,11 @@ const httpsPort = 9443;
 const Flower = require("./models/Flowers")
 const fs = require("fs");
 const https = require("https");
+const cors = require("cors")
 
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
 // const file = fs.readFileSync("./1E1E39C06F84D2F12E2D7ACBE472A999.txt")
 const key = fs.readFileSync("private.key");
